@@ -1,0 +1,269 @@
+/* Переменные */
+:root {
+    --primary: #8B4513; /* Коричневый */
+    --secondary: #D2691E; /* Шоколадный */
+    --accent: #FF6347; /* Терракотовый */
+    --bg: #CEB388; /* Кремовый */
+    --text-dark: #333;
+    --text-light: #FFF;
+    --transition: all 0.4s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Шапка */
+.header {
+    background-color: var(--primary);
+    color: var(--text-light);
+    padding: 1rem 0;
+}
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.nav-list {
+    display: flex;
+    list-style: none;
+}
+.nav-link {
+    color: var(--text-light);
+    text-decoration: none;
+    margin-left: 2rem;
+    transition: var(--transition);
+}
+.nav-link:hover {
+    color: var(--accent);
+}
+.mobile-menu-btn {
+    display: none;
+}
+
+/* Hero */
+.hero {
+    background-image: url('hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: var(--text-light);
+    text-align: center;
+    padding: 10rem 2rem;
+}
+.hero h1 {
+    font-size: 3rem;
+}
+.btn {
+    display: inline-block;
+    margin: 1rem;
+    padding: 0.8rem 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-primary { background-color: var(--primary); color: var(--text-light); }
+.btn-secondary { background-color: transparent; color: var(--primary); border: 2px solid var(--primary); }
+.btn-primary:hover { opacity: 0.9; }
+.btn-secondary:hover { background-color: var(--primary); color: var(--text-light); }
+
+/* Анимации появления */
+.animate-on-scroll {
+    opacity: 0;
+}
+.animated {
+    opacity: 1 !important;
+}
+
+/* Секции */
+.about, .menu, .why-us, .reviews, .booking, .subscribe {
+    padding: 5rem 0;
+}
+.about-content, .services-grid, .testimonial-slider, .contact-form {
+    margin-top: 2rem;
+}
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+.service-card {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+}
+.service-card i {
+    font-size: 2rem;
+    color: var(--primary);
+}
+.service-card h3 { margin-top: 1rem; }
+.service-card p { margin-top: 0.5rem; }
+.service-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.15); transition: transform 0.3s ease; }
+
+/* Отзывы */
+.testimonial-slider {
+    display: flex;
+    overflow-x: auto;
+}
+.testimonial { min-width: 300px; padding: 1rem; margin-right: 1rem; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.testimonial img { width: 60px; height: 60px; border-radius: 50%; margin-bottom: 1rem; }
+.stars { color: gold; }
+.stars input { display:none; }
+.stars label { cursor: pointer; }
+.stars input[type=radio]:checked ~ label { color:gold; }
+.add-review-btn { background-color: var(--accent); color:#fff; border:none; padding:.8rem 1.5rem; border-radius:5px; cursor:pointer; margin-bottom:.5rem; }
+.add-review-btn i { margin-right:.5rem; }
+
+/* Формы */
+.contact-form input,
+.contact-form select,
+.contact-form textarea,
+#testimonialForm input,
+#testimonialForm textarea,
+#subscribeForm input {
+    width: calc(100% - 22px);
+    padding: .8rem;
+    margin-bottom:.8rem;
+    border-radius:.4rem;
+}
+.contact-form button,
+#testimonialForm button,
+#subscribeForm button {
+    width:100%;
+}
+.contact-form button,
+#testimonialForm button,
+#subscribeForm button { background-color:#fff; border:none; padding:.8rem; border-radius:.4rem; cursor:pointer; transition:.3s; }
+.contact-form button[type=submit]:hover,
+#testimonialForm button[type=submit]:hover,
+#subscribeForm button[type=submit]:hover { background-color:#f9f9f9; }
+.contact-form button[type=submit]:active,
+#testimonialForm button[type=submit]:active,
+#subscribeForm button[type=submit]:active { transform:translateY(2px); }
+
+/* Подвал */
+footer {
+    background-color:#fff8dc;
+    text-align:center;
+    padding:.8rem 0;
+}
+
+/* Адаптивность */
+@media (max-width:768px) {
+   .header .nav-list { display:none; flex-direction:column; position:fixed; top:-100%; left:-100%; width:100%; height:calc(100vh - 70px); background-color:#fff8dc; z-index:9999;}
+   .header .nav-list.active { top:70px; left:0;}
+   .header .mobile-menu-btn { display:block;}
+   .hero h1 { font-size:2.2rem;}
+   .about-content { flex-direction:column;}
+   .services-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:.8rem;}
+   .contact-form input,
+   #testimonialForm input,
+   #subscribeForm input { width:calc(100% - 22px);}
+   .contact-form button,
+   #testimonialForm button,
+   #subscribeForm button { width:calc(100% - 22px);}
+   footer { padding:.4rem;}
+}
+
+
+
+/* ===== ОБЩИЙ CSS ДЛЯ БЛОКОВ ===== */
+
+/* Контейнер */
+.menu .container,
+.why-us .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Заголовки */
+.menu h2,
+.why-us h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+/* Сетка — 3 колонки для ПК */
+.menu .services-grid,
+.why-us .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* Базовая карточка с фоном-заглушкой — работает для обоих блоков */
+.menu .service-card,
+.why-us .service-card {
+    position: relative;
+    background-image: url('img/Logo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: white;
+    padding: 25px 20px;
+    background-color: rgba(0, 0, 0, 0.45);
+    background-blend-mode: overlay;
+    cursor: pointer;
+}
+
+/* Эффект при наведении */
+.menu .service-card:hover,
+.why-us .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+/* Иконки */
+.menu .service-card i,
+.why-us .service-card i {
+    font-size: 2.8rem;
+    margin-bottom: 12px;
+    color: #fff;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Заголовки в карточках */
+.menu .service-card h3,
+.why-us .service-card h3 {
+    font-size: 1.8rem;
+    margin: 0 0 8px 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    font-weight: 600;
+}
+
+/* Текст в карточках */
+.menu .service-card p,
+.why-us .service-card p {
+    font-size: 1.1rem;
+    margin: 0;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+    opacity: 0.95;
+}

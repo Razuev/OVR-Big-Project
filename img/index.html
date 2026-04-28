@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мастерская вкуса — Кафе авторской кухни</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/all.min.css">
+    <script src="Proj/script.js"></script>
+</head>
+
+<body>
+<header class="header">
+    <div class="container">
+        <div class="logo"><i class="fas fa-utensils"></i> Мастерская вкуса</div>
+        <nav class="nav">
+            <ul class="nav-list">
+                <li><a href="#home" class="nav-link">Главная</a></li>
+                <li><a href="#about" class="nav-link">О нас</a></li>
+                <li><a href="#menu" class="nav-link">Меню</a></li>
+                <li><a href="#why" class="nav-link">Почему мы</a></li>
+                <li><a href="#reviews" class="nav-link">Отзывы</a></li>
+                <li><a href="#booking" class="nav-link">Бронирование</a></li>
+                <li><a href="#subscribe" class="nav-link">Подписка</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Открыть меню"><i class="fas fa-bars"></i></button>
+        </nav>
+    </div>
+</header>
+
+<section id="home" class="hero">
+    <div class="container">
+        <h1>Авторская кухня с душой</h1>
+        <p>Откройте для себя новые вкусы в атмосфере творчества и уюта.</p>
+        <a href="#booking" class="btn btn-primary">Забронировать столик</a>
+        <a href="#menu" class="btn btn-secondary">Наше меню</a>
+    </div>
+</section>
+
+<section id="about" class="about">
+    <div class="container">
+        <div class="about-content">
+            <h2>О нас</h2>
+            <p>«Мастерская вкуса» — это пространство для гастрономических открытий. Мы создаём блюда, вдохновлённые традициями и современными тенденциями, используя только свежие и качественные продукты.</p>
+            <a href="#booking" class="btn btn-secondary">Связаться с нами</a>
+        </div>
+        <div class="about-image">
+            <img src="Logo.jpg" alt="Мастерская вкуса" loading="img">
+        </div>
+    </div>
+</section>
+
+<section id="menu" class="menu">
+    <div class="container">
+        <h2>Меню</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-utensils"></i>
+                <h3>Завтраки</h3>
+                <p>Идеальное начало дня.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-utensils"></i>
+                <h3>Бизнес-ланчи</h3>
+                <p>Сбалансированные и сытные.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-utensils"></i>
+                <h3>Ужины</h3>
+                <p>Для особенных вечеров.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-utensils"></i>
+                <h3>Десерты</h3>
+                <p>Авторские сладости.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-utensils"></i>
+                <h3>Напитки</h3>
+                <p>Кофе, чай, лимонады.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-utensils"></i>
+                <h3>Детское меню</h3>
+                <p>Полезно и вкусно.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="why" class="why-us">
+    <div class="container">
+        <h2>Почему мы?</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-star"></i>
+                <h3>Авторская кухня</h3>
+                <p>Уникальные рецепты от шефа.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-heart"></i>
+                <h3>Свежие продукты</h3>
+                <p>Локальные поставщики.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-coffee"></i>
+                <h3>Атмосфера уюта</h3>
+                <p>Дизайн и музыка.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-glass-cheers"></i>
+                <h3>Широкий выбор вин</h3>
+                <p>Подборка сомелье.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-users"></i>
+                <h3>Для компаний</h3>
+                <p>Банкеты и фуршеты.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-gift"></i>
+                <h3>Подарочные сертификаты</h3>
+                <p>Лучший подарок гурману.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="reviews" class="reviews">
+    <div class="container">
+        <h2>Отзывы наших гостей</h2>
+        <button class="add-review-btn"><i class="fas fa-plus"></i> Добавить отзыв</button>
+
+        <!-- Модальное окно для отзыва -->
+        <div id="reviewModal" class="modal">
+            <form id="testimonialForm" class="modal-content animate-on-scroll">
+                <span class="close-modal">×</span>
+                <input type="text" id="name" placeholder="Ваше имя" pattern="[A-Za-zА-Яа-яЁё ]+" required maxlength="50">
+                <select id="status" required disabled><option value="">Клиент</option></select>
+                <textarea id="review" placeholder="Ваш отзыв" required maxlength="500"></textarea>
+                
+                <!-- Звёзды рейтинга -->
+                <label for="rating">Оценка:</label><br/>
+                <input type="radio" name="rating" value=5 checked>5<i class='fas fa-star'></i>
+                <input type="radio" name="rating" value=4>4<i class='fas fa-star'></i>
+                <input type="radio" name="rating" value=3>3<i class='fas fa-star'></i>
+                <input type="radio" name="rating" value=2>2<i class='fas fa-star'></i>
+                <input type="radio" name="rating" value=1>1<i class='fas fa-star'></i><br/>
+                
+                <button type="submit">Отправить отзыв</button>
+            </form>
+        </div>
+
+        <!-- Слайдер отзывов -->
+        <div class="testimonial-slider animate-on-scroll">
+            <!-- Отзывы добавляются сюда через JS -->
+        </div>
+    </div>
+</section>
+
+<section id="booking" class="booking contact-section">
+    <div class="container">
+        <h2>Бронирование:</h2>
+        <form id="bookingForm" class="contact-form animate-on-scroll">
+            <input type="text" id='name' placeholder='Имя' pattern='[A-Za-zА-Яа-яЁё ]+' required maxlength='50'>
+            
+             <!-- Дата и время -->
+             <input type='date' id='date' required min=''+new Date().toISOString().split('T')[0] >
+             <input type='time' id='time' required min='11:00' max='23:00' step='900'>
+            
+             <!-- Количество гостей -->
+             <select id='guests' required><option value='' disabled selected>Гостей</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4+</option></select>
+            
+             <!-- Телефон -->
+             <input type='tel' id='phone' placeholder='+7 (___) ___–__–__' pattern='\+7\s?$\d{3}$\s?\d{3}[- ]?\d{2}[- ]?\d{2}' required maxlength='18'>
+            
+             <!-- Email -->
+             <input type='email' id='email' placeholder='Email' required maxlength='100'>
+            
+             <!-- Сообщение -->
+             <textarea id='message' placeholder='Пожелания (по желанию)' maxlength='500'></textarea>
+            
+             <button type='submit'>Отправить заявку на бронирование</button>
+             <span id='bookingResponse'></span> <!-- Ответ формы -->
+        </form>
+
+        <!-- Карта -->
+        <iframe src="" width ="100%" height ="450px;" style ="border:0;" allowfullscreen="" loading ="lazy"></iframe> 
+    </div>
+</section>
+
+<section id = "subscribe"  class = "subscribe animate-on-scroll">
+    <div  class = "container " >
+         <h2 > Подпишитесь на новости </h2 >
+         <form  id = "subscribeForm " >
+              <input  type = "email " placeholder = "Ваш email " required maxlength = "100 " >
+              <button  type = "submit "> Подписаться </button >
+              <span  id = "subscribeResponse " > </span >
+         </form >
+         <!-- Имитация вывода данных -->
+         <ul  id = "subscribersList " > </ul >
+     </ div >
+ </ section >
+
+<footer id = "footer "  >
+     < div  class = "container " >
+          © 2025 Кафе авторской кухни «Мастерская вкуса». Все права защищены.
+     </ div >
+ </ footer >
+
+<script src = "script.js " > </script >
+
+</body>
+</html>
