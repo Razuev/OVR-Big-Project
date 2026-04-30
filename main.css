@@ -267,3 +267,92 @@ footer {
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
     opacity: 0.95;
 }
+  /* Стили формы */
+  #reviewForm {
+    display: flex; flex-direction: column; gap: 10px; 
+    max-width: 400px; margin: 20px auto;
+  }
+  #reviewForm input, #reviewForm select, #reviewForm textarea {
+    padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit;
+  }
+  #reviewForm textarea { resize: vertical; min-height: 80px; }
+  #reviewForm button {
+    padding: 12px; background: #8b5a2b; color: #fff; border: none; 
+    border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s;
+  }
+  #reviewForm button:hover { background: #6d4520; }
+
+  /* Стили модального окна */
+  .modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;
+  }
+  .modal-box {
+    background: #fff; padding: 30px; border-radius: 10px; text-align: center; 
+    position: relative; max-width: 400px; width: 90%; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  .close-modal {
+    position: absolute; top: 10px; right: 15px; font-size: 24px; 
+    cursor: pointer; color: #666; transition: 0.2s;
+  }
+  .close-modal:hover { color: #000; }
+
+.quotes-section {
+  padding: 40px 20px 20px;
+  background: linear-gradient(to bottom, #CEB388, #CEB388);
+}
+
+.quotes-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.quote-block {
+  padding: 25px 20px;
+  text-align: center;
+  border: 3px solid #8b5a2b;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 8px rgba(139, 90, 43, 0.2);
+}
+
+.quote-block blockquote {
+  font-style: italic;
+  font-size: 1.1em;
+  color: #3e2723;
+  margin: 0 0 15px 0;
+  line-height: 1.5;
+  font-family: Georgia, serif;
+}
+
+.quote-block cite {
+  font-style: normal;
+  font-weight: bold;
+  color: #8b5a2b;
+  font-size: 1em;
+}
+
+@media (max-width: 768px) {
+  .quotes-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .quote-block {
+    padding: 20px 15px;
+  }
+  
+  .quote-block blockquote {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .quotes-section {
+    padding: 30px 15px 15px;
+  }
+}

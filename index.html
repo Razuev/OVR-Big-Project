@@ -129,31 +129,60 @@
 
 <section id="reviews" class="reviews">
     <div class="container">
-        <h2>Отзывы наших гостей</h2>
-        <button class="add-review-btn"><i class="fas fa-plus"></i> Добавить отзыв</button>
+        <section id="reviews">
+  <h2>Отзывы наших гостей</h2>
+  
+  <form id="reviewForm">
+    <input type="text" name="name" placeholder="Ваше имя" required>
+    <select name="rating" required>
+      <option value="" disabled selected>Оценка</option>
+      <option value="5">5</option>
+      <option value="4">4</option>
+      <option value="3">3</option>
+      <option value="2">2</option>
+      <option value="1">1</option>
+    </select>
+    <textarea name="review" placeholder="Напишите ваш отзыв..." required></textarea>
+    <button type="submit">Отправить отзыв</button>
+  </form>
 
-        <!-- Модальное окно для отзыва -->
-        <div id="reviewModal" class="modal">
-            <form id="testimonialForm" class="modal-content animate-on-scroll">
-                <span class="close-modal">×</span>
-                <input type="text" id="name" placeholder="Ваше имя" pattern="[A-Za-zА-Яа-яЁё ]+" required maxlength="50">
-                <select id="status" required disabled><option value="">Клиент</option></select>
-                <textarea id="review" placeholder="Ваш отзыв" required maxlength="500"></textarea>
-                
-                <!-- Звёзды рейтинга -->
-                <label for="rating">Оценка:</label><br/>
-                <input type="radio" name="rating" value=5 checked>5<i class='fas fa-star'></i>
-                <input type="radio" name="rating" value=4>4<i class='fas fa-star'></i>
-                <input type="radio" name="rating" value=3>3<i class='fas fa-star'></i>
-                <input type="radio" name="rating" value=2>2<i class='fas fa-star'></i>
-                <input type="radio" name="rating" value=1>1<i class='fas fa-star'></i><br/>
-                
-                <button type="submit">Отправить отзыв</button>
-            </form>
-        </div>
+  <!-- Модальное окно "Спасибо" -->
+  <div id="thankModal" class="modal-overlay">
+    <div class="modal-box">
+      <span class="close-modal" title="Закрыть">&times;</span>
+      <h3>Спасибо за отзыв!</h3>
+      <p>Мы ценим ваше мнение и обязательно учтём его.</p>
+    </div>
+  </div>
+</section>
 
-        <!-- Слайдер отзывов -->
-        <div class="testimonial-slider animate-on-scroll">
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('reviewForm');
+    const modal = document.getElementById('thankModal');
+    const closeBtn = modal.querySelector('.close-modal');
+
+    // Обработка отправки формы
+    form.addEventListener('submit', (e) => {
+      e.preventDefault(); // Отменяем стандартную перезагрузку страницы
+      // Здесь можно добавить fetch/AJAX для сохранения отзыва на сервере
+      
+      modal.style.display = 'flex'; // Показываем окно
+      form.reset(); // Очищаем поля формы
+    });
+
+    // Закрытие по крестику
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    // Закрытие при клике на затемнённый фон
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.style.display = 'none';
+    });
+  });
+</script>
             <!-- Отзывы добавляются сюда через JS -->
         </div>
     </div>
@@ -189,6 +218,31 @@
         <iframe src="" width ="100%" height ="450px;" style ="border:0;" allowfullscreen="" loading ="lazy"></iframe> 
     </div>
 </section>
+<section class="quotes-section">
+  <div class="quotes-container">
+    <div class="quote-block">
+      <blockquote>
+        "Еда — это не просто sustenance, это искусство, которое мы создаём каждый день."
+      </blockquote>
+      <cite>— Гордон Рамзи</cite>
+    </div>
+    
+    <div class="quote-block">
+      <blockquote>
+        "Скажи мне, что ты ешь, и я скажу тебе, кто ты."
+      </blockquote>
+      <cite>— Жан Антельм Брийя-Саварен</cite>
+    </div>
+    
+    <div class="quote-block">
+      <blockquote>
+        "Хорошая еда — это основа настоящего счастья."
+      </blockquote>
+      <cite>— Август Эскофье</cite>
+    </div>
+  </div>
+</section>
+
 
 <section id = "subscribe"  class = "subscribe animate-on-scroll">
     <div  class = "container " >
