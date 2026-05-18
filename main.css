@@ -1,218 +1,175 @@
-/* Переменные */
+/* ===== ПЕРЕМЕННЫЕ ===== */
 :root {
-    --primary: #8B4513; /* Коричневый */
-    --secondary: #D2691E; /* Шоколадный */
-    --accent: #FF6347; /* Терракотовый */
-    --bg: #CEB388; /* Кремовый */
+    --primary: #8B4513;      /* Коричневый */
+    --secondary: #D2691E;    /* Шоколадный */
+    --accent: #FF6347;       /* Терракотовый */
+    --bg: #CEB388;           /* Кремовый */
     --text-dark: #333;
     --text-light: #FFF;
     --transition: all 0.4s ease;
 }
 
+/* ===== СБРОС СТИЛЕЙ ===== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     font-family: 'Open Sans', sans-serif;
     background-color: var(--bg);
     color: var(--text-dark);
     line-height: 1.6;
 }
+
 .container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Шапка */
+/* ===== ШАПКА ===== */
 .header {
     background-color: var(--primary);
     color: var(--text-light);
     padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
+
 .header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
+
 .nav-list {
     display: flex;
     list-style: none;
+    gap: 1rem;
 }
+
 .nav-link {
     color: var(--text-light);
     text-decoration: none;
-    margin-left: 2rem;
+    padding: 0.5rem 1rem;
     transition: var(--transition);
-}
-.nav-link:hover {
-    color: var(--accent);
-}
-.mobile-menu-btn {
-    display: none;
+    border-radius: 4px;
 }
 
-/* Hero */
+.nav-link:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.1);
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* ===== HERO ===== */
 .hero {
-    background-image: url('hero-bg.jpg');
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%), url('img/hero-bg.jpg');
     background-size: cover;
     background-position: center;
     color: var(--text-light);
     text-align: center;
     padding: 10rem 2rem;
 }
+
 .hero h1 {
     font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+}
+
+/* ===== КНОПКИ ===== */
 .btn {
     display: inline-block;
-    margin: 1rem;
+    margin: 0.5rem;
     padding: 0.8rem 2rem;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    border: none;
 }
-.btn-primary { background-color: var(--primary); color: var(--text-light); }
-.btn-secondary { background-color: transparent; color: var(--primary); border: 2px solid var(--primary); }
-.btn-primary:hover { opacity: 0.9; }
-.btn-secondary:hover { background-color: var(--primary); color: var(--text-light); }
 
-/* Анимации появления */
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--text-light);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary);
+    transform: translateY(-2px);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary);
+    color: var(--text-light);
+    transform: translateY(-2px);
+}
+
+/* ===== АНИМАЦИИ ===== */
 .animate-on-scroll {
     opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
-.animated {
+
+.animate-on-scroll.animated {
     opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
-/* Секции */
-.about, .menu, .why-us, .reviews, .booking, .subscribe {
-    padding: 5rem 0;
-}
-.about-content, .services-grid, .testimonial-slider, .contact-form {
-    margin-top: 2rem;
-}
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
-.service-card {
-    background-color: #fff;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    text-align: center;
-}
-.service-card i {
-    font-size: 2rem;
-    color: var(--primary);
-}
-.service-card h3 { margin-top: 1rem; }
-.service-card p { margin-top: 0.5rem; }
-.service-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.15); transition: transform 0.3s ease; }
-
-/* Отзывы */
-.testimonial-slider {
-    display: flex;
-    overflow-x: auto;
-}
-.testimonial { min-width: 300px; padding: 1rem; margin-right: 1rem; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-.testimonial img { width: 60px; height: 60px; border-radius: 50%; margin-bottom: 1rem; }
-.stars { color: gold; }
-.stars input { display:none; }
-.stars label { cursor: pointer; }
-.stars input[type=radio]:checked ~ label { color:gold; }
-.add-review-btn { background-color: var(--accent); color:#fff; border:none; padding:.8rem 1.5rem; border-radius:5px; cursor:pointer; margin-bottom:.5rem; }
-.add-review-btn i { margin-right:.5rem; }
-
-/* Формы */
-.contact-form input,
-.contact-form select,
-.contact-form textarea,
-#testimonialForm input,
-#testimonialForm textarea,
-#subscribeForm input {
-    width: calc(100% - 22px);
-    padding: .8rem;
-    margin-bottom:.8rem;
-    border-radius:.4rem;
-}
-.contact-form button,
-#testimonialForm button,
-#subscribeForm button {
-    width:100%;
-}
-.contact-form button,
-#testimonialForm button,
-#subscribeForm button { background-color:#fff; border:none; padding:.8rem; border-radius:.4rem; cursor:pointer; transition:.3s; }
-.contact-form button[type=submit]:hover,
-#testimonialForm button[type=submit]:hover,
-#subscribeForm button[type=submit]:hover { background-color:#f9f9f9; }
-.contact-form button[type=submit]:active,
-#testimonialForm button[type=submit]:active,
-#subscribeForm button[type=submit]:active { transform:translateY(2px); }
-
-/* Подвал */
-footer {
-    background-color:#fff8dc;
-    text-align:center;
-    padding:.8rem 0;
+/* ===== СЕКЦИИ ===== */
+.about, .menu, .why-us, .reviews, .booking, .subscribe, .quotes-section {
+    padding: 5rem 2rem;
 }
 
-/* Адаптивность */
-@media (max-width:768px) {
-   .header .nav-list { display:none; flex-direction:column; position:fixed; top:-100%; left:-100%; width:100%; height:calc(100vh - 70px); background-color:#fff8dc; z-index:9999;}
-   .header .nav-list.active { top:70px; left:0;}
-   .header .mobile-menu-btn { display:block;}
-   .hero h1 { font-size:2.2rem;}
-   .about-content { flex-direction:column;}
-   .services-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:.8rem;}
-   .contact-form input,
-   #testimonialForm input,
-   #subscribeForm input { width:calc(100% - 22px);}
-   .contact-form button,
-   #testimonialForm button,
-   #subscribeForm button { width:calc(100% - 22px);}
-   footer { padding:.4rem;}
-}
-
-
-
-/* ===== ОБЩИЙ CSS ДЛЯ БЛОКОВ ===== */
-
-/* Контейнер */
-.menu .container,
-.why-us .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Заголовки */
-.menu h2,
-.why-us h2 {
+.section-title {
     text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 40px;
+    margin-bottom: 3rem;
+    color: var(--primary);
 }
 
-/* Сетка — 3 колонки для ПК */
-.menu .services-grid,
-.why-us .services-grid {
+/* ===== СЕТКА СЕРВИСОВ ===== */
+.services-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
 }
 
-/* Базовая карточка с фоном-заглушкой — работает для обоих блоков */
-.menu .service-card,
-.why-us .service-card {
+.service-card {
     position: relative;
     background-image: url('img/Logo.jpg');
     background-size: cover;
@@ -231,128 +188,571 @@ footer {
     background-color: rgba(0, 0, 0, 0.45);
     background-blend-mode: overlay;
     cursor: pointer;
+    text-align: center;
 }
 
-/* Эффект при наведении */
-.menu .service-card:hover,
-.why-us .service-card:hover {
+.service-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3);
     background-color: rgba(0, 0, 0, 0.35);
 }
 
-/* Иконки */
-.menu .service-card i,
-.why-us .service-card i {
+.service-card i {
     font-size: 2.8rem;
     margin-bottom: 12px;
     color: #fff;
     text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
 }
 
-/* Заголовки в карточках */
-.menu .service-card h3,
-.why-us .service-card h3 {
+.service-card h3 {
     font-size: 1.8rem;
     margin: 0 0 8px 0;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
     font-weight: 600;
 }
 
-/* Текст в карточках */
-.menu .service-card p,
-.why-us .service-card p {
+.service-card p {
     font-size: 1.1rem;
     margin: 0;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
     opacity: 0.95;
 }
-  /* Стили формы */
-  #reviewForm {
-    display: flex; flex-direction: column; gap: 10px; 
-    max-width: 400px; margin: 20px auto;
-  }
-  #reviewForm input, #reviewForm select, #reviewForm textarea {
-    padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit;
-  }
-  #reviewForm textarea { resize: vertical; min-height: 80px; }
-  #reviewForm button {
-    padding: 12px; background: #8b5a2b; color: #fff; border: none; 
-    border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s;
-  }
-  #reviewForm button:hover { background: #6d4520; }
 
-  /* Стили модального окна */
-  .modal-overlay {
-    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;
-  }
-  .modal-box {
-    background: #fff; padding: 30px; border-radius: 10px; text-align: center; 
-    position: relative; max-width: 400px; width: 90%; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  }
-  .close-modal {
-    position: absolute; top: 10px; right: 15px; font-size: 24px; 
-    cursor: pointer; color: #666; transition: 0.2s;
-  }
-  .close-modal:hover { color: #000; }
+/* ===== О НАС ===== */
+.about .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
 
+.about-image img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* ===== ОТЗЫВЫ ===== */
+#reviewForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 450px;
+    margin: 2rem auto;
+}
+
+#reviewForm input,
+#reviewForm select,
+#reviewForm textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+#reviewForm textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#reviewForm button {
+    padding: 14px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: 0.2s;
+}
+
+#reviewForm button:hover {
+    background: var(--secondary);
+}
+
+/* Модальное окно "Спасибо" для отзывов */
+#thankModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+#thankModal .modal-box {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    position: relative;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+#thankModal .close-modal {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 26px;
+    cursor: pointer;
+    color: #666;
+    transition: 0.2s;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+#thankModal .close-modal:hover {
+    color: var(--accent);
+    background: #f0f0f0;
+}
+
+/* ===== ФОРМЫ ===== */
+.contact-form {
+    max-width: 600px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #f9f9f9;
+    transition: 0.2s;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--secondary);
+    background: #fff;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.contact-form button {
+    padding: 14px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: 0.3s;
+}
+
+.contact-form button:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+}
+
+#bookingResponse {
+    text-align: center;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 6px;
+    display: none;
+}
+
+/* ===== ЦИТАТЫ ===== */
 .quotes-section {
-  padding: 40px 20px 20px;
-  background: linear-gradient(to bottom, #CEB388, #CEB388);
+    background: linear-gradient(to bottom, var(--bg), #fff8dc);
 }
 
 .quotes-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .quote-block {
-  padding: 25px 20px;
-  text-align: center;
-  border: 3px solid #8b5a2b;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 8px rgba(139, 90, 43, 0.2);
+    padding: 25px 20px;
+    text-align: center;
+    border: 3px solid var(--primary);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(139, 90, 43, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.quote-block:hover {
+    transform: translateY(-5px);
 }
 
 .quote-block blockquote {
-  font-style: italic;
-  font-size: 1.1em;
-  color: #3e2723;
-  margin: 0 0 15px 0;
-  line-height: 1.5;
-  font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 1.1em;
+    color: #3e2723;
+    margin: 0 0 15px 0;
+    line-height: 1.5;
+    font-family: Georgia, serif;
 }
 
 .quote-block cite {
-  font-style: normal;
-  font-weight: bold;
-  color: #8b5a2b;
-  font-size: 1em;
+    font-style: normal;
+    font-weight: bold;
+    color: var(--primary);
+    font-size: 1em;
+}
+
+/* ===== ПОДВАЛ ===== */
+footer {
+    background-color: #fff8dc;
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-dark);
+    font-size: 0.9rem;
+}
+
+/* ===== МОДАЛЬНОЕ ОКНО БРОНИРОВАНИЯ ===== */
+#bookingModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#bookingModal.active {
+    display: flex;
+    opacity: 1;
+}
+
+#bookingModal .modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.35s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-40px) scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+#bookingModal .close-modal-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    color: var(--primary);
+    transition: 0.25s;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f5f5f5;
+}
+
+#bookingModal .close-modal-btn:hover {
+    color: var(--accent);
+    background: #ffebee;
+    transform: rotate(90deg);
+}
+
+#bookingModal .modal-title {
+    text-align: center;
+    color: var(--primary);
+    margin: 0 0 25px 0;
+    font-size: 1.9rem;
+    font-weight: 700;
+}
+
+/* Контейнер схемы зала */
+#bookingModal .modal-image-container {
+    margin-bottom: 25px;
+    padding: 10px;
+    background: #fafafa;
+    border-radius: 10px;
+    border: 2px solid var(--secondary);
+}
+
+#bookingModal .restaurant-scheme {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+#bookingModal .restaurant-scheme:hover {
+    transform: scale(1.02);
+}
+
+/* Заглушка при ошибке загрузки */
+#bookingModal .modal-image-container .scheme-placeholder {
+    padding: 40px 20px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+}
+
+#bookingModal .modal-image-container .scheme-placeholder .icon {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    display: block;
+    opacity: 0.9;
+}
+
+#bookingModal .modal-image-container .scheme-placeholder h4 {
+    margin: 0 0 8px 0;
+    font-size: 1.3rem;
+}
+
+#bookingModal .modal-image-container .scheme-placeholder p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.95rem;
+}
+
+/* Форма в модальном окне */
+#bookingModal .modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#bookingModal .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+#bookingModal .form-group label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
+#bookingModal .form-group input,
+#bookingModal .form-group select {
+    padding: 12px 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #fafafa;
+    transition: 0.25s;
+}
+
+#bookingModal .form-group input:focus,
+#bookingModal .form-group select:focus {
+    outline: none;
+    border-color: var(--secondary);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(210, 105, 30, 0.15);
+}
+
+#bookingModal .form-row {
+    display: flex;
+    gap: 15px;
+}
+
+#bookingModal .form-row .form-group {
+    flex: 1;
+}
+
+#bookingModal .modal-submit-btn {
+    width: 100%;
+    margin-top: 10px;
+    font-weight: bold;
+    padding: 14px;
+    font-size: 1.1rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#bookingModal .modal-submit-btn:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+}
+
+#bookingModal .modal-response {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 600;
+    min-height: 24px;
+    padding: 12px;
+    border-radius: 8px;
+    display: none;
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 992px) {
+    .about .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .menu .services-grid,
+    .why-us .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
-  .quotes-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .quote-block {
-    padding: 20px 15px;
-  }
-  
-  .quote-block blockquote {
-    font-size: 1em;
-  }
+    .header .nav-list {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--primary);
+        padding: 1rem 0;
+        z-index: 999;
+    }
+    
+    .header .nav-list.active {
+        display: flex;
+    }
+    
+    .header .mobile-menu-btn {
+        display: block;
+    }
+    
+    .nav-link {
+        padding: 0.8rem 1.5rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .menu .services-grid,
+    .why-us .services-grid,
+    .quotes-container {
+        grid-template-columns: 1fr;
+    }
+    
+    #bookingModal .form-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    #bookingModal .modal-content {
+        padding: 25px 20px;
+        margin: 10px;
+    }
+    
+    #bookingModal .modal-title {
+        font-size: 1.6rem;
+    }
 }
 
 @media (max-width: 480px) {
-  .quotes-section {
-    padding: 30px 15px 15px;
-  }
+    .hero {
+        padding: 6rem 1.5rem;
+    }
+    
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .btn {
+        display: block;
+        width: calc(100% - 1rem);
+        margin: 0.5rem auto;
+    }
+    
+    .about, .menu, .why-us, .reviews, .booking, .subscribe, .quotes-section {
+        padding: 3rem 1rem;
+    }
+    
+    #bookingModal .modal-content {
+        padding: 20px 15px;
+        width: 95%;
+    }
+    
+    #bookingModal .modal-title {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+    }
+    
+    #bookingModal .modal-image-container {
+        padding: 8px;
+    }
+    
+    #bookingModal .form-group input,
+    #bookingModal .form-group select {
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
+    
+    #bookingModal .modal-submit-btn {
+        padding: 12px;
+        font-size: 1rem;
+    }
 }
+
+/* ===== УТИЛИТЫ ===== */
+.text-center { text-align: center; }
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+.mb-1 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 2rem; }
+.hidden { display: none !important; }

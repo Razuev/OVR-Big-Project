@@ -5,8 +5,12 @@
     <title>Мастерская вкуса — Кафе авторской кухни</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/all.min.css">
-    <script src="Proj/script.js"></script>
+    <link rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+      crossorigin="anonymous" 
+      referrerpolicy="no-referrer">
+    <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -20,7 +24,7 @@
                 <li><a href="#menu" class="nav-link">Меню</a></li>
                 <li><a href="#why" class="nav-link">Почему мы</a></li>
                 <li><a href="#reviews" class="nav-link">Отзывы</a></li>
-                <li><a href="#booking" class="nav-link">Бронирование</a></li>
+                <li><a href="#booking" class="btn btn-primary open-booking-modal">Бронирование</a></li>
                 <li><a href="#subscribe" class="nav-link">Подписка</a></li>
             </ul>
             <button class="mobile-menu-btn" aria-label="Открыть меню"><i class="fas fa-bars"></i></button>
@@ -32,7 +36,7 @@
     <div class="container">
         <h1>Авторская кухня с душой</h1>
         <p>Откройте для себя новые вкусы в атмосфере творчества и уюта.</p>
-        <a href="#booking" class="btn btn-primary">Забронировать столик</a>
+        <a href="#booking" class="btn btn-primary open-booking-modal">Забронировать столик</a>
         <a href="#menu" class="btn btn-secondary">Наше меню</a>
     </div>
 </section>
@@ -45,7 +49,7 @@
             <a href="#booking" class="btn btn-secondary">Связаться с нами</a>
         </div>
         <div class="about-image">
-            <img src="img/Logo1.jpg" alt="Мастерская вкуса" loading="img" width="200" height="200">
+            <img src="img/Logo1.jpg" alt="Мастерская вкуса" loading="img" width="200" height="400">
         </div>
     </div>
 </section>
@@ -188,40 +192,11 @@
     </div>
 </section>
 
-<section id="booking" class="booking contact-section">
-    <div class="container">
-        <h1>Забронировать столик:</h1>
-        <form id="bookingForm" class="contact-form animate-on-scroll">
-            <input type="text" id='name' placeholder='Имя' pattern='[A-Za-zА-Яа-яЁё ]+' required maxlength='50'>
-            
-             <!-- Дата и время -->
-             <input type='date' id='date' required min=''+new Date().toISOString().split('T')[0] >
-             <input type='time' id='time' required min='11:00' max='23:00' step='900'>
-            
-             <!-- Количество гостей -->
-             <select id='guests' required><option value='' disabled selected>Гостей</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4+</option></select>
-            
-             <!-- Телефон -->
-             <input type='tel' id='phone' placeholder='+7 (___) ___–__–__' pattern='\+7\s?$\d{3}$\s?\d{3}[- ]?\d{2}[- ]?\d{2}' required maxlength='18'>
-            
-             <!-- Email -->
-             <input type='email' id='email' placeholder='Email' required maxlength='100'>
-            
-             <!-- Сообщение -->
-             <textarea id='message' placeholder='Пожелания (по желанию)' maxlength='500'></textarea>
-            
-             <button type='submit'>Отправить заявку на бронирование</button>
-             <span id='bookingResponse'></span> <!-- Ответ формы -->
-        </form>
-
-        
-    </div>
-</section>
 <section class="quotes-section">
   <div class="quotes-container">
     <div class="quote-block">
       <blockquote>
-        "Еда — это не просто sustenance, это искусство, которое мы создаём каждый день."
+        "Еда — это не просто susteinance, это искусство, которое мы создаём каждый день."
       </blockquote>
       <cite>— Гордон Рамзи</cite>
     </div>
@@ -242,23 +217,69 @@
   </div>
 </section>
 
+<!-- Модальное окно бронирования -->
+<div id="bookingModal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-modal-btn">&times;</span>
+        <h2 class="modal-title">Бронирование столика</h2>
+        
+        <div class="modal-image-container">
+    <img src="img/restaurant-scheme.png" alt="Схема зала ресторана" class="restaurant-scheme">
+</div>
 
-<section id = "subscribe"  class = "subscribe animate-on-scroll">
-    <div  class = "container " >
-         <h2 > Подпишитесь на новости </h2 >
-         <form  id = "subscribeForm " >
-              <input  type = "email " placeholder = "Ваш email " required maxlength = "100 " >
-              <button  type = "submit "> Подписаться </button >
-              <span  id = "subscribeResponse " > </span >
-         </form >
-         <!-- Имитация вывода данных -->
-         <ul  id = "subscribersList " > </ul >
-     </ div >
- </ section >
+        <form id="popupBookingForm" class="modal-form">
+            <div class="form-group">
+                <label for="modal-fio">ФИО *</label>
+                <input type="text" id="modal-fio" name="fio" placeholder="Иванов Иван Иванович" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="modal-table">Столик *</label>
+                    <select id="modal-table" name="tableNumber" required>
+                        <option value="" disabled selected>Выберите №</option>
+                        <option value="1">Стол 1</option>
+                        <option value="2">Стол 2</option>
+                        <option value="3">Стол 3</option>
+                        <option value="4">Стол 4</option>
+                        <option value="5">Стол 5</option>
+                        <option value="6">Стол 6</option>
+                        <option value="7">Стол 7</option>
+                        <option value="8">Стол 8</option>
+                        <option value="9">Стол 9</option>
+                        <option value="10">Стол 10</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="modal-guests">Гости *</label>
+                    <input type="number" id="modal-guests" name="guests" min="1" max="10" value="2" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="modal-date">Дата *</label>
+                    <input type="date" id="modal-date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="modal-time">Время *</label>
+                    <input type="time" id="modal-time" name="time" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="modal-phone">Телефон *</label>
+                <input type="tel" id="modal-phone" name="phone" placeholder="+7 (999) 123-45-67" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary modal-submit-btn">Отправить заявку</button>
+        </form>
+        <div id="modalResponse" class="modal-response"></div>
+    </div>
+</div>
 
 <footer id = "footer "  >
           © 2025 Кафе авторской кухни «Мастерская вкуса». Все права защищены.
-<script src = "script.js " > </script >
 
 </body>
 </html>
