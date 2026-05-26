@@ -25,7 +25,7 @@
                 <li><a href="#why" class="nav-link">Почему мы</a></li>
                 <li><a href="#reviews" class="nav-link">Отзывы</a></li>
                 <li><a href="#booking" class="btn btn-primary open-booking-modal">Бронирование</a></li>
-                <li><a href="#subscribe" class="nav-link">Подписка</a></li>
+                <li><a href="#subscribe" class="nav-link" id="subscribeTrigger"> Подписка</a></li>
             </ul>
             <button class="mobile-menu-btn" aria-label="Открыть меню"><i class="fas fa-bars"></i></button>
         </nav>
@@ -461,6 +461,110 @@ window.onscroll = function() {
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeFeatPopup(); });
   });
 })();
+</script>
+<!-- Кнопка-триггер (добавьте этот ID к вашей существующей кнопке "Подписка" или используйте этот блок) -->
+<button id="subscribeTrigger" class="btn btn-primary">Подписаться на рассылку</button>
+
+<!-- Модальное окно подписки -->
+<div id="subscribeModal" class="modal-overlay">
+  <div class="modal-content subscribe-modal">
+    <button class="close-modal-btn" aria-label="Закрыть">&times;</button>
+    <h2 class="modal-title">Подписка на рассылку</h2>
+    <p class="modal-subtitle">Получайте специальные предложения, новости и рецепты первыми!</p>
+    
+    <form id="subscribeForm" class="modal-form" novalidate>
+      <div class="form-group">
+        <label for="subEmail">Ваш Email</label>
+        <input type="email" id="subEmail" placeholder="example@mail.ru" required autocomplete="email">
+        <span class="validation-msg error" id="emailError">Введите корректный адрес электронной почты</span>
+        <span class="validation-msg success" id="emailSuccess">Email принят!</span>
+      </div>
+      <button type="submit" class="modal-submit-btn">Подписаться</button>
+    </form>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('subscribeModal');
+  const trigger = document.getElementById('subscribeTrigger');
+  const closeBtn = modal.querySelector('.close-modal-btn');
+  const form = document.getElementById('subscribeForm');
+  const emailInput = document.getElementById('subEmail');
+  const errorEl = document.getElementById('emailError');
+  const successEl = document.getElementById('emailSuccess');
+
+  // 🔹 Открытие окна
+  if (trigger) {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      resetValidation();
+      emailInput.focus();
+    });
+  }
+
+  // 🔹 Закрытие окна
+  const closeModal = () => {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    form.reset();
+    resetValidation();
+  };
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  });
+
+  // 🔹 Валидация в реальном времени
+  emailInput.addEventListener('input', () => {
+    const val = emailInput.value.trim();
+    if (val === '') { resetValidation(); return; }
+    
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+    toggleValidation(isValid);
+  });
+
+  // 🔹 Обработка отправки
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const val = emailInput.value.trim();
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+
+    if (!isValid) {
+      toggleValidation(false);
+      emailInput.focus();
+      return;
+    }
+
+    // Имитация отправки на сервер
+    const submitBtn = form.querySelector('.modal-submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Подписка...';
+    submitBtn.disabled = true;
+
+    setTimeout(() => {
+      alert(`✅ Спасибо! Вы успешно подписались: ${val}\nМы отправим первое письмо в течение 24 часов.`);
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+      closeModal();
+    }, 1000);
+  });
+
+  // 🔹 Вспомогательные функции
+  function toggleValidation(isValid) {
+    errorEl.style.display = isValid ? 'none' : 'block';
+    successEl.style.display = isValid ? 'block' : 'none';
+    emailInput.classList.toggle('input-error', !isValid);
+    emailInput.classList.toggle('input-success', isValid);
+  }
+  function resetValidation() {
+    errorEl.style.display = 'none';
+    successEl.style.display = 'none';
+    emailInput.classList.remove('input-error', 'input-success');
+  }
+});
 </script>    
 </body>
 </html>
