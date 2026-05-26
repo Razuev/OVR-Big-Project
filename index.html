@@ -313,6 +313,154 @@ window.onscroll = function() {
         btn.style.display = 'none';
     }
 };
+</script>
+<!-- Модальное окно с позициями меню -->
+<div class="m-popup-overlay" id="menuPopup">
+  <div class="m-popup-box">
+    <button class="m-popup-close" aria-label="Закрыть">&times;</button>
+    <h2 class="m-popup-title" id="popupTitle"></h2>
+    <ul class="m-popup-list" id="popupList"></ul>
+  </div>
+</div>
+<script>
+(function() {
+  // 📝 Данные меню (редактируйте только этот объект)
+  const MENU_DATA = {
+    "Завтраки": [
+      { name: "Овсяная каша с ягодами", price: "350 ₽" },
+      { name: "Сырники со сметаной", price: "420 ₽" },
+      { name: "Английский завтрак", price: "590 ₽" },
+      { name: "Круассан с миндалём", price: "290 ₽" }
+    ],
+    "Бизнес-ланчи": [
+      { name: "Суп дня + салат", price: "450 ₽" },
+      { name: "Паста с курицей", price: "490 ₽" },
+      { name: "Гречка с котлетой", price: "380 ₽" }
+    ],
+    "Ужины": [
+      { name: "Стейк рибай", price: "1200 ₽" },
+      { name: "Филе сибаса", price: "950 ₽" },
+      { name: "Ризотто с грибами", price: "780 ₽" }
+    ],
+    "Десерты": [
+      { name: "Тирамису", price: "390 ₽" },
+      { name: "Чизкейк Нью-Йорк", price: "420 ₽" },
+      { name: "Шоколадный фондан", price: "450 ₽" }
+    ],
+    "Напитки": [
+      { name: "Капучино", price: "250 ₽" },
+      { name: "Лимонад домашний", price: "220 ₽" },
+      { name: "Чай авторский", price: "280 ₽" }
+    ],
+    "Детское меню": [
+      { name: "Куриные наггетсы", price: "320 ₽" },
+      { name: "Пюре с тефтелькой", price: "340 ₽" },
+      { name: "Молочный коктейль", price: "260 ₽" }
+    ]
+  };
+
+  const overlay = document.getElementById('menuPopup');
+  const titleEl = document.getElementById('popupTitle');
+  const listEl = document.getElementById('popupList');
+  const closeBtn = overlay.querySelector('.m-popup-close');
+
+  function openPopup(category) {
+    const items = MENU_DATA[category];
+    if (!items) return;
+    titleEl.textContent = category;
+    listEl.innerHTML = items.map(i => 
+      `<li><span>${i.name}</span><span class="m-price">${i.price}</span></li>`
+    ).join('');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePopup() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // 🔍 Автоматический поиск кликабельных категорий в вашем коде
+  document.addEventListener('DOMContentLoaded', () => {
+    const targets = document.querySelectorAll('h2, h3, .menu-card, a, button, div');
+    targets.forEach(el => {
+      const text = el.textContent.trim();
+      if (MENU_DATA[text]) {
+        el.style.cursor = 'pointer';
+        el.addEventListener('click', (e) => {
+          if (e.target.closest('a, button') && e.target !== el) return;
+          e.preventDefault();
+          openPopup(text);
+        });
+      }
+    });
+
+    closeBtn.addEventListener('click', closePopup);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closePopup(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePopup(); });
+  });
+})();
+
+</script>
+<!-- Модальное окно преимуществ -->
+<div class="feat-popup-overlay" id="featurePopup">
+  <div class="feat-popup-box">
+    <button class="feat-popup-close" aria-label="Закрыть">&times;</button>
+    <h2 class="feat-popup-title" id="featPopupTitle"></h2>
+    <div class="feat-popup-content" id="featPopupContent"></div>
+  </div>
+</div>
+<script>
+(function() {
+  // 📝 Подробное описание каждого преимущества
+  const FEATURES_DATA = {
+    "Авторская кухня": "Наши блюда создаются шеф-поваром с использованием уникальных рецептов, сочетающих классические техники и современные гастрономические тренды. Каждое блюдо — это маленькое произведение искусства, подаваемое с вниманием к деталям.",
+    "Свежие продукты": "Мы работаем только с проверенными локальными фермерами и поставщиками. Все ингредиенты проходят строгий контроль качества перед попаданием на кухню, чтобы гарантировать вам максимальную пользу, безопасность и насыщенный вкус.",
+    "Уютная атмосфера": "Интерьер кафе выполнен в тёплых тонах с использованием натуральных материалов: дерево, камень, мягкий текстиль. По вечерам звучит живая акустическая музыка, создавая идеальное настроение для романтического ужина или дружеской встречи.",
+    "Винная карта": "Наш сомелье тщательно подобрал коллекцию вин из лучших регионов мира. К каждому блюду мы предложим идеальное сочетание, раскрывающее новые грани вкуса. Доступны вина по бокалам и целые бутылки для особых случаев.",
+    "Банкеты": "Просторный зал вместимостью до 50 гостей идеально подходит для корпоративов, дней рождения и семейных торжеств. Мы предоставляем индивидуальное меню, декор по запросу и профессиональное обслуживание, чтобы ваш праздник прошёл без забот.",
+    "Подарочные сертификаты": "Отличный подарок для ценителей вкусной еды и уютной атмосферы. Доступны номиналы от 1000 до 10000 рублей. Сертификаты действуют 12 месяцев с момента покупки, их можно оформить в электронном или печатном виде."
+  };
+
+  const overlay = document.getElementById('featurePopup');
+  const titleEl = document.getElementById('featPopupTitle');
+  const contentEl = document.getElementById('featPopupContent');
+  const closeBtn = overlay.querySelector('.feat-popup-close');
+
+  function openFeatPopup(featureName) {
+    const info = FEATURES_DATA[featureName];
+    if (!info) return;
+    titleEl.textContent = featureName;
+    contentEl.textContent = info;
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeFeatPopup() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // 🔍 Автоматический поиск заголовков преимуществ в вашем коде
+    const targets = document.querySelectorAll('h3, .feature, p, div');
+    targets.forEach(el => {
+      const text = el.textContent.trim();
+      if (FEATURES_DATA[text]) {
+        el.style.cursor = 'pointer';
+        el.addEventListener('click', (e) => {
+          if (e.target.closest('a, button') && e.target !== el) return;
+          e.preventDefault();
+          openFeatPopup(text);
+        });
+      }
+    });
+
+    closeBtn.addEventListener('click', closeFeatPopup);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeFeatPopup(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeFeatPopup(); });
+  });
+})();
 </script>    
 </body>
 </html>
